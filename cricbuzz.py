@@ -9,15 +9,17 @@ class CricbuzzParser():
         # self.getXml(url)
         pass
        
-    def getXml(self,url):
+    def getXml(self):
         #Change coding here
-        f = urllib2.urlopen(url)
+        f = urllib2.urlopen("http://synd.cricbuzz.com/j2me/1.0/livematches.xml")
         doc = xml.dom.minidom.parse(f)
         node = doc.documentElement
         matches = node.getElementsByTagName("match")
         return matches
 
     def handleMatches(self,matches):
+        """This function handles the element <match> and
+        avoids duplicate matches to be processed. """
         duplicate = []
         match_details = []
         mchDesc = matches[0].getAttribute("mchDesc")
@@ -42,6 +44,8 @@ class CricbuzzParser():
         return match_details
 
     def handleTestMatch(self,match):
+        """For handling Test Matches.
+        To Do: Write Code for Parsing Innings detail"""
         series = match.getAttribute("srs")
         mtype = match.getAttribute("type")
         if mtype != "TEST":
@@ -53,12 +57,13 @@ class CricbuzzParser():
             for state in states:
                 match_cstate = state.getAttribute("mchState")
                 mstatus = state.getAttribute("status")
-                if mstatus.startswith("Starts"):
+                if mstatus.startswith("Starts") or mstatus.startswith("Coming"):
                     return None       #Match hasn't started Yet.
-        return {"Match":match_desc,"Venue":mground,"State":match_cstate,"Status":mstatus} 
+        return {"Match Format":"TEST","Match":match_desc,"Venue":mground,"State":match_cstate,"Status":mstatus} 
                 
             
     def handleMatch(self,match):
+        """Handles ODI and T20 matches"""
         bowl_runs  = None
         bowl_wkts = None
         bowl_overs = None
@@ -72,7 +77,7 @@ class CricbuzzParser():
         for state in states:
             match_cstate = state.getAttribute("mchState")
             mstatus = state.getAttribute("status")
-            if mstatus.startswith("Starts"):
+            if mstatus.startswith("Starts") or mstatus.startswith("Coming"):
                 return None       #Match hasn't started Yet.
         batting_team = match.getElementsByTagName("btTm")
         bowling_team = match.getElementsByTagName("blgTm")
@@ -92,9 +97,5 @@ class CricbuzzParser():
         return { "Series": series, "Match Format": mtype, "Team":match_desc, "Venue":mground, "Match State":match_cstate,"Match Status":mstatus, "Batting team":batting_team_name, "Bowling team":bowling_team_name, batting_team_name + " Runs":bat_runs, batting_team_name + " Overs":bat_overs, batting_team_name + " Wickets":bat_wkts, bowling_team_name + " Runs":bowl_runs, bowling_team_name + " Overs": bowl_overs, bowling_team_name + " Wickets": bowl_wkts }
 
 if __name__ == '__main__':
-    url = "http://synd.cricbuzz.com/j2me/1.0/livematches.xml"
-    cric = CricbuzzParser()
-    match = cric.getXml(url)
-    det = cric.handleMatches(match)
-    #det = cric.handleTestMatch(match)
-    print det
+    pass
+    
