@@ -79,23 +79,38 @@ class CricbuzzParser():
             mstatus = state.getAttribute("status")
             if mstatus.startswith("Starts") or mstatus.startswith("Coming"):
                 return None       #Match hasn't started Yet.
-        batting_team = match.getElementsByTagName("btTm")
-        bowling_team = match.getElementsByTagName("blgTm")
-        batting_team_name = batting_team[0].getAttribute("sName")
-        bowling_team_name = bowling_team[0].getAttribute("sName")
-        innings = match.getElementsByTagName("Inngs")
-        bat_runs = innings[0].getAttribute("r")
-        bat_overs = innings[0].getAttribute("ovrs")
-        bat_wkts = innings[0].getAttribute("wkts")
+        try:
+            batting_team = match.getElementsByTagName("btTm")
+            bowling_team = match.getElementsByTagName("blgTm")
+            batting_team_name = batting_team[0].getAttribute("sName")
+            bowling_team_name = bowling_team[0].getAttribute("sName")
+            innings = match.getElementsByTagName("Inngs")
+            bat_runs = innings[0].getAttribute("r")
+            bat_overs = innings[0].getAttribute("ovrs")
+            bat_wkts = innings[0].getAttribute("wkts")
+        except Exception:
+            #Match is comple. Only Result is availabe now and btTm tag has been changed to Tm
+            #So, now only status of the match is important. Initialize none to other parameters.
+            batting_team = None
+            bowling_team = None
+            batting_team_name = None
+            bowling_team_name = None
+            innings = None
+            bat_runs = None
+            bat_overs = None
+            bat_wkts = None
         try:
             bowl_runs = innings[1].getAttribute("r")
             bowl_overs = innings[1].getAttribute("ovrs")
             bowl_wkts = innings[1].getAttribute("wkts")
-        except IndexError:
+        except Exception:
             # The opponent team hasn't yet started to Bat.
             pass
-        return { "Series": series, "Match Format": mtype, "Team":match_desc, "Venue":mground, "Match State":match_cstate,"Match Status":mstatus, "Batting team":batting_team_name, "Bowling team":bowling_team_name, batting_team_name + " Runs":bat_runs, batting_team_name + " Overs":bat_overs, batting_team_name + " Wickets":bat_wkts, bowling_team_name + " Runs":bowl_runs, bowling_team_name + " Overs": bowl_overs, bowling_team_name + " Wickets": bowl_wkts }
+        return { "Series": series, "Match Format": mtype, "Team":match_desc, "Venue":mground, "Match State":match_cstate,"Match Status":mstatus, "Batting team":batting_team_name, "Bowling team":bowling_team_name, "Batting Team Runs":bat_runs, "Batting Team Overs":bat_overs, "Batting Team Wickets":bat_wkts, "Bowling Team Runs":bowl_runs, "Bowling Team Overs": bowl_overs, "Bowling Team Wickets": bowl_wkts }
 
 if __name__ == '__main__':
-    pass
+    cric = CricbuzzParser()
+    match = cric.getXml()
+    details = cric.handleMatches(match) #Returns Match details as a Dictionary. Parse it according to requirements.
+    print details
     
