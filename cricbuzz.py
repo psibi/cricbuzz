@@ -51,16 +51,47 @@ class CricbuzzParser():
         if mtype != "TEST":
             return None
         else:
+            inngs = []
             match_desc = match.getAttribute("mchDesc")
             mground = match.getAttribute("grnd")
+            match_of_the_series =  match.getAttribute("mnum")
             states = match.getElementsByTagName("state")
+            batting_team = match.getElementsByTagName("btTm")
+            bowling_team = match.getElementsByTagName("blgTm")
+            batting_team_name = batting_team[0].getAttribute("sName")
+            bowling_team_name = bowling_team[0].getAttribute("sName")
+            bowling_innings = bowling_team[0].getElementsByTagName("Inngs")
+            batting_innings = batting_team[0].getElementsByTagName("Inngs")
+
+            for i in range (len(batting_innings)):
+                bat_runs = {"Runs": batting_innings[i].getAttribute("r")}
+                bat_overs = {"Overs": batting_innings[i].getAttribute("ovrs")}
+                bat_wkts = {"Wickets": batting_innings[i].getAttribute("wkts")}
+                desc1 = {"Desc": batting_innings[i].getAttribute("desc")}
+                inngs_detail = [desc1,bat_runs,bat_wkts,bat_overs]
+                inngs.append(inngs_detail)
+            inngs.insert(0,"Team:" + batting_team_name)
+            batting_team_inngs = inngs
+            inngs = []
+           
+            for i in range (len(bowling_innings)):
+                bowl_runs = {"Runs": bowling_innings[i].getAttribute("r")}
+                bowl_overs = {"Overs": bowling_innings[i].getAttribute("ovrs")}
+                bowl_wkts = {"Wickets": bowling_innings[i].getAttribute("wkts")}
+                desc1 = {"Desc": bowling_innings[i].getAttribute("desc")}
+                inngs_detail = [desc1,bowl_runs,bowl_wkts,bowl_overs]
+                inngs.append(inngs_detail)
+            inngs.insert(0,"Team:" + bowling_team_name)
+            bowling_team_inngs = inngs
+
             for state in states:
                 match_cstate = state.getAttribute("mchState")
                 mstatus = state.getAttribute("status")
                 if mstatus.startswith("Starts") or mstatus.startswith("Coming"):
                     return None       #Match hasn't started Yet.
-        return {"Match Format":"TEST","Match":match_desc,"Venue":mground,"State":match_cstate,"Status":mstatus} 
-                
+
+        return {"Series": series,"Match Format":"TEST","Team":match_desc,"Venue":mground,"Match State":match_cstate,"Match Status":mstatus,"Match Details":{"Batting Team":batting_team_inngs,"Bowling Team":bowling_team_inngs}} 
+        
             
     def handleMatch(self,match):
         """Handles ODI and T20 matches"""
@@ -112,5 +143,5 @@ if __name__ == '__main__':
     cric = CricbuzzParser()
     match = cric.getXml()
     details = cric.handleMatches(match) #Returns Match details as a Dictionary. Parse it according to requirements.
-    print details
+    # print details
     
