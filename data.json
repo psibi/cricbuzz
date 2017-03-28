@@ -1,0 +1,194 @@
+{
+    "SLU23 vs AFG": {
+        "Batting Team Overs": null,
+        "Bowling Team Overs": null,
+        "Match Status": "SL U23 won by 35 runs",
+        "Venue": "",
+        "Bowling Team Wickets": null,
+        "Team": "SLU23 vs AFG",
+        "Match Format": "ODI",
+        "Batting Team Wickets": null,
+        "Match State": "Result",
+        "Series": "Asian Cricket Council Emerging Teams Cup, 2017",
+        "Batting team": null,
+        "Bowling Team Runs": null,
+        "Bowling team": null,
+        "Batting Team Runs": null
+    },
+    "AFG vs IRE": {
+        "Match State": "stump",
+        "Series": "ICC Intercontinental Cup, 2015-17",
+        "Match Status": "Day 1: Stumps",
+        "Venue": "Greater Noida Sports Complex Ground",
+        "Team": "AFG vs IRE",
+        "Match Format": "TEST",
+        "Match Details": {
+            "Batting Team": [
+                "Team:AFG",
+                [
+                    {
+                        "Desc": "1st Inns"
+                    },
+                    {
+                        "Runs": "357"
+                    },
+                    {
+                        "Wickets": "6"
+                    },
+                    {
+                        "Overs": "96"
+                    }
+                ]
+            ],
+            "Bowling Team": [
+                "Team:IRE"
+            ]
+        }
+    },
+    "SL vs BAN": {
+        "Batting Team Overs": "49.5",
+        "Bowling Team Overs": null,
+        "Match Status": "No result",
+        "Venue": "Rangiri Dambulla International Stadium",
+        "Bowling Team Wickets": null,
+        "Team": "SL vs BAN",
+        "Match Format": "ODI",
+        "Batting Team Wickets": "10",
+        "Match State": "complete",
+        "Series": "Bangladesh tour of Sri Lanka, 2017",
+        "Batting team": "SL",
+        "Bowling Team Runs": null,
+        "Bowling team": "BAN",
+        "Batting Team Runs": "311"
+    },
+    "NZ vs RSA": {
+        "Match State": "stump",
+        "Series": "South Africa tour of New Zealand, 2017",
+        "Match Status": "RSA trail by 95 runs",
+        "Venue": "Seddon Park",
+        "Team": "NZ vs RSA",
+        "Match Format": "TEST",
+        "Match Details": {
+            "Batting Team": [
+                "Team:RSA",
+                [
+                    {
+                        "Desc": "2nd Inns"
+                    },
+                    {
+                        "Runs": "80"
+                    },
+                    {
+                        "Wickets": "5"
+                    },
+                    {
+                        "Overs": "39"
+                    }
+                ],
+                [
+                    {
+                        "Desc": "1st Inns"
+                    },
+                    {
+                        "Runs": "314"
+                    },
+                    {
+                        "Wickets": "10"
+                    },
+                    {
+                        "Overs": "89.2"
+                    }
+                ]
+            ],
+            "Bowling Team": [
+                "Team:NZ",
+                [
+                    {
+                        "Desc": "1st Inns"
+                    },
+                    {
+                        "Runs": "489"
+                    },
+                    {
+                        "Wickets": "10"
+                    },
+                    {
+                        "Overs": "162.1"
+                    }
+                ]
+            ]
+        }
+    },
+    "IND vs AUS": {
+        "Match State": "complete",
+        "Series": "Australia tour of India, 2017",
+        "Match Status": "Ind won by 8 wkts",
+        "Venue": "Himachal Pradesh Cricket Association Stadium",
+        "Team": "IND vs AUS",
+        "Match Format": "TEST",
+        "Match Details": {
+            "Batting Team": [
+                "Team:IND",
+                [
+                    {
+                        "Desc": "2nd Inns"
+                    },
+                    {
+                        "Runs": "106"
+                    },
+                    {
+                        "Wickets": "2"
+                    },
+                    {
+                        "Overs": "23.5"
+                    }
+                ],
+                [
+                    {
+                        "Desc": "1st Inns"
+                    },
+                    {
+                        "Runs": "332"
+                    },
+                    {
+                        "Wickets": "10"
+                    },
+                    {
+                        "Overs": "118.1"
+                    }
+                ]
+            ],
+            "Bowling Team": [
+                "Team:AUS",
+                [
+                    {
+                        "Desc": "2nd Inns"
+                    },
+                    {
+                        "Runs": "137"
+                    },
+                    {
+                        "Wickets": "10"
+                    },
+                    {
+                        "Overs": "53.5"
+                    }
+                ],
+                [
+                    {
+                        "Desc": "1st Inns"
+                    },
+                    {
+                        "Runs": "300"
+                    },
+                    {
+                        "Wickets": "10"
+                    },
+                    {
+                        "Overs": "88.3"
+                    }
+                ]
+            ]
+        }
+    }
+}
